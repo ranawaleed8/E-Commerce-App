@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reval/checkout.dart';
 import 'package:reval/models/cart.dart';
 import 'package:reval/widget/contaner.dart';
 import 'package:reval/widget/texxt.dart';
@@ -85,9 +86,10 @@ class _CartPageState extends State<CartPage> {
                             print(
                               CartModel().items.map((e) => e.toJson()).toList(),
                             );
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text('Order sent to backend (mock)'),
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Purchase(),
                               ),
                             );
                           },
