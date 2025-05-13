@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:reval/home.dart';
 import 'package:reval/log_in.dart';
 
 void main() {

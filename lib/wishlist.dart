@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:reval/account.dart';
 import 'package:reval/models/wishlist_model.dart'; // استيراد WishlistModel و WishlistItem
 import 'package:reval/cartview.dart';
 import 'package:reval/categores/itemss.dart';
@@ -27,7 +28,7 @@ class _WishlistState extends State<Wishlist> {
       case 0:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Viewall()),
+          MaterialPageRoute(builder: (context) => AccountPage()),
         );
         break;
       case 1:

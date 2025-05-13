@@ -16,8 +16,12 @@ class _CartPageState extends State<CartPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Your Cart"),
-        backgroundColor: Color(0xe8cb5e48),
+        title: Text(
+          "Your Cart",
+          style: TextStyle(fontFamily: "Titan_One"),
+          textAlign: TextAlign.center,
+        ),
+        backgroundColor: Color(0xe8ffffff),
       ),
       backgroundColor: Color(0xFFEBE3DD),
       body: Padding(

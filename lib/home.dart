@@ -1,5 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:reval/account.dart';
 import 'package:reval/cartview.dart';
 import 'package:reval/viewall.dart';
 import 'package:reval/widget/bot.dart';
@@ -29,7 +30,7 @@ class _HomeState extends State<Home> {
       case 0:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Viewall()),
+          MaterialPageRoute(builder: (context) => AccountPage()),
         );
         break;
       case 1:
