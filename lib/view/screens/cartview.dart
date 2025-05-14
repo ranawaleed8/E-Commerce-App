@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:reval/checkout.dart';
+import 'package:reval/view/screens/checkout.dart';
 import 'package:reval/models/cart.dart';
-import 'package:reval/widget/contaner.dart';
-import 'package:reval/widget/texxt.dart';
+import 'package:reval/view/widget/contaner.dart';
+import 'package:reval/view/widget/texxt.dart';
 
 class CartPage extends StatefulWidget {
   @override

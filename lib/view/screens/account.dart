@@ -1,9 +1,9 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:reval/cartview.dart';
-import 'package:reval/home.dart';
-import 'package:reval/log_in.dart';
-import 'package:reval/wishlist.dart';
+import 'package:reval/view/screens/cartview.dart';
+import 'package:reval/view/screens/home.dart';
+import 'package:reval/view/screens/log_in.dart';
+import 'package:reval/view/screens/wishlist.dart';
 
 class AccountPage extends StatefulWidget {
   const AccountPage({super.key});
@@ -65,7 +65,6 @@ class _AccountPageState extends State<AccountPage> {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          // 🔒 Account Info Section with Icon
           Card(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:reval/cartview.dart';
+import 'package:reval/view/screens/cartview.dart';
 import 'package:reval/models/cart.dart';
 import 'package:reval/models/wishlist_model.dart';
-import 'package:reval/widget/contaner.dart';
-import 'package:reval/widget/texxt.dart';
+import 'package:reval/view/widget/contaner.dart';
+import 'package:reval/view/widget/texxt.dart';
 
 class ProductDetailsPage extends StatefulWidget {
   final String imageAsset;

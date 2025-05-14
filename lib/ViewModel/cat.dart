@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:reval/categores/itemss.dart';
-import 'package:reval/home.dart';
-import 'package:reval/widget/icobot.dart';
-import 'package:reval/widget/imgbot.dart';
-import 'package:reval/widget/textico.dart';
-import 'package:reval/widget/texxt.dart';
+import 'package:reval/ViewModel/itemss.dart';
+import 'package:reval/view/screens/home.dart';
+import 'package:reval/view/widget/icobot.dart';
+import 'package:reval/view/widget/imgbot.dart';
+import 'package:reval/view/widget/textico.dart';
+import 'package:reval/view/widget/texxt.dart';
 
 class Product {
   final String imagePath;
@@ -53,10 +53,10 @@ class ShoppingScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         itemCount: products.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          mainAxisSpacing: 30,
-          crossAxisSpacing: 20,
-          childAspectRatio: 0.1,
+          crossAxisCount: 2, // عدد الأعمدة
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
+          childAspectRatio: 0.6, // <== هذا هو الأهم
         ),
         itemBuilder: (context, index) {
           final product = products[index];

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:reval/widget/imgbot.dart';
-import 'package:reval/widget/texxt.dart';
+import 'package:reval/view/widget/imgbot.dart';
+import 'package:reval/view/widget/texxt.dart';
 
 class Catigor extends StatelessWidget {
   final Widget page;

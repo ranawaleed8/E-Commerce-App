@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:reval/account.dart';
-import 'package:reval/models/wishlist_model.dart'; // استيراد WishlistModel و WishlistItem
-import 'package:reval/cartview.dart';
-import 'package:reval/categores/itemss.dart';
-import 'package:reval/home.dart';
-import 'package:reval/viewall.dart';
-import 'package:reval/widget/imgbot.dart';
-import 'package:reval/widget/texxt.dart';
+import 'package:reval/view/screens/account.dart';
+import 'package:reval/models/wishlist_model.dart';
+import 'package:reval/view/screens/cartview.dart';
+import 'package:reval/ViewModel/itemss.dart';
+import 'package:reval/view/screens/home.dart';
+import 'package:reval/view/widget/imgbot.dart';
+import 'package:reval/view/widget/texxt.dart';
 
 class Wishlist extends StatefulWidget {
   @override

@@ -35,7 +35,7 @@ class Contaner extends StatelessWidget {
           bottomLeft: Radius.circular(curv1),
           bottomRight: Radius.circular(curv2),
         ),
-        child: Image.asset(img, fit: BoxFit.cover),
+        child: Image.asset(img, fit: BoxFit.fill),
       ),
     );
   }

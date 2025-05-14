@@ -1,17 +1,52 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:reval/home.dart';
-import 'forgot_password.dart';
-import 'sign_up.dart';
+import 'package:reval/view/screens/home.dart';
+import 'package:reval/view/screens/auth_service.dart';
+import 'package:reval/view/screens/sign_up.dart';
+import 'package:reval/view/screens/forgot_password.dart';
 
-class logIn extends StatelessWidget {
+class logIn extends StatefulWidget {
   const logIn({super.key});
+
+  @override
+  State<logIn> createState() => _logInState();
+}
+
+class _logInState extends State<logIn> {
+  final AuthService _authService = AuthService();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  String? _errorMessage;
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _signIn() async {
+    final user = await _authService.signIn(
+      _emailController.text.trim(),
+      _passwordController.text.trim(),
+    );
+    if (user != null) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const Home()),
+      );
+    } else {
+      setState(() {
+        _errorMessage = 'Invalid email or password';
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFEBE3DD),
+      backgroundColor: const Color(0xFFEBE3DD),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.only(
@@ -21,8 +56,8 @@ class logIn extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: 150),
-                Text(
+                const SizedBox(height: 150),
+                const Text(
                   'Welcome to Reval  ^_^',
                   style: TextStyle(
                     color: Color(0xe8cb5e48),
@@ -42,33 +77,36 @@ class logIn extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: TextField(
+                    controller: _emailController,
                     decoration: InputDecoration(
                       hintText: 'Enter your E-mail',
-                      hintStyle: TextStyle(
+                      hintStyle: const TextStyle(
                         color: Color(0xe8cb5e48),
                         fontSize: 12,
                       ),
-                      prefixIcon: Icon(Icons.email, color: Color(0xe8cb5e48)),
-                      enabledBorder: OutlineInputBorder(
+                      prefixIcon: const Icon(
+                        Icons.email,
+                        color: Color(0xe8cb5e48),
+                      ),
+                      enabledBorder: const OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white),
                       ),
-                      focusedBorder: OutlineInputBorder(
+                      focusedBorder: const OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white),
                       ),
                       fillColor: Colors.white,
                       filled: true,
+                      errorText: _errorMessage,
                     ),
                   ),
                 ),
-
                 const SizedBox(height: 20),
-
-                // Password Field
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: TextField(
+                    controller: _passwordController,
                     obscureText: true,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'Enter your password',
                       hintStyle: TextStyle(
                         color: Color(0xe8cb5e48),
@@ -89,8 +127,6 @@ class logIn extends StatelessWidget {
                     ),
                   ),
                 ),
-
-                // Forgot Password
                 Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 28.0,
@@ -104,11 +140,11 @@ class logIn extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => ForgotPasswordPage(),
+                              builder: (context) => const ForgotPasswordPage(),
                             ),
                           );
                         },
-                        child: Text(
+                        child: const Text(
                           'Forgot password?',
                           style: TextStyle(
                             color: Color(0xe8cb5e48),
@@ -119,30 +155,22 @@ class logIn extends StatelessWidget {
                     ],
                   ),
                 ),
-
                 const SizedBox(height: 10),
-
-                // Sign In Button
                 Padding(
                   padding: const EdgeInsets.all(25.0),
                   child: SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Home()),
-                        );
-                      },
+                      onPressed: _signIn,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xe8cb5e48),
+                        backgroundColor: const Color(0xe8cb5e48),
                         foregroundColor: Colors.white,
-                        padding: EdgeInsets.symmetric(vertical: 14),
+                        padding: const EdgeInsets.symmetric(vertical: 14),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                      child: Text(
+                      child: const Text(
                         'Sign In',
                         style: TextStyle(
                           fontSize: 16,
@@ -152,17 +180,16 @@ class logIn extends StatelessWidget {
                     ),
                   ),
                 ),
-
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15.0),
                   child: RichText(
                     text: TextSpan(
-                      style: TextStyle(fontSize: 18, color: Colors.white),
+                      style: const TextStyle(fontSize: 18, color: Colors.white),
                       children: [
-                        TextSpan(text: "Don't have account?"),
+                        const TextSpan(text: "Don't have account?"),
                         TextSpan(
                           text: 'Sign up',
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Color(0xe8cb5e48),
                             fontWeight: FontWeight.bold,
                           ),
@@ -172,7 +199,7 @@ class logIn extends StatelessWidget {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => SignUpPage(),
+                                      builder: (context) => const SignUpPage(),
                                     ),
                                   );
                                 },

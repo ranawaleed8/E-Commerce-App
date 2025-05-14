@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart'; // ضروري
 import 'package:reval/main.dart';
-import 'package:reval/widget/contaner.dart';
-import 'package:reval/widget/imgbot.dart';
-import 'package:reval/widget/textico.dart';
-import 'package:reval/widget/texxt.dart';
+import 'package:reval/view/widget/imgbot.dart';
+import 'package:reval/view/widget/textico.dart';
+import 'package:reval/view/widget/texxt.dart';
 
 class Ittem extends StatelessWidget {
   final String img1;
@@ -31,63 +31,80 @@ class Ittem extends StatelessWidget {
       children: [
         Row(
           children: [
-            SizedBox(width: 35),
-            Center(
-              child: Column(
-                children: [
-                  Contaner(curv1: 50, curv2: 50, h: 170, w: 140, img: img1),
-                  SizedBox(height: 5),
-                  Textico(
-                    text1: 'ADD',
-                    colr: Colors.black,
-                    h: 35,
-                    w: 80,
-                    size: 18,
-                    ico: Icons.add,
-                    page: MyApp(),
-                    family: "Creepster",
-                  ),
-                  SizedBox(height: 5),
-                  Texxt(text1: name1, family: "", colr: Colors.black, size: 20),
-                  Texxt(
-                    text1: price1,
-                    family: "",
-                    colr: Colors.black45,
-                    size: 18,
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(width: 30),
+            SizedBox(width: 35.w),
             Center(
               child: Column(
                 children: [
                   Imgbot(
-                    curv1: 50,
-                    curv2: 50,
-                    h: 170,
-                    w: 140,
-                    img: img2,
+                    curv1: 50.r,
+                    curv2: 50.r,
+                    h: 170.h,
+                    w: 140.w,
+                    img: img1,
                     page: page,
                   ),
-                  SizedBox(height: 5),
+                  SizedBox(height: 5.h),
                   Textico(
                     text1: 'ADD',
                     colr: Colors.black,
-                    h: 35,
-                    w: 80,
-                    size: 18,
+                    h: 35.h,
+                    w: 80.w,
+                    size: 18.sp,
                     ico: Icons.add,
                     page: MyApp(),
                     family: "Creepster",
                   ),
-                  SizedBox(height: 5),
-                  Texxt(text1: name2, family: "", colr: Colors.black, size: 20),
+                  SizedBox(height: 5.h),
+                  Texxt(
+                    text1: name1,
+                    family: "",
+                    colr: Colors.black,
+                    size: 20.sp,
+                  ),
+                  Texxt(
+                    text1: price1,
+                    family: "",
+                    colr: Colors.black45,
+                    size: 18.sp,
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(width: 30.w),
+            Center(
+              child: Column(
+                children: [
+                  Imgbot(
+                    curv1: 50.r,
+                    curv2: 50.r,
+                    h: 170.h,
+                    w: 140.w,
+                    img: img2,
+                    page: page,
+                  ),
+                  SizedBox(height: 5.h),
+                  Textico(
+                    text1: 'ADD',
+                    colr: Colors.black,
+                    h: 35.h,
+                    w: 80.w,
+                    size: 18.sp,
+                    ico: Icons.add,
+                    page: MyApp(),
+                    family: "Creepster",
+                  ),
+                  SizedBox(height: 5.h),
+                  Texxt(
+                    text1: name2,
+                    family: "",
+                    colr: Colors.black,
+                    size: 20.sp,
+                  ),
                   Texxt(
                     text1: price2,
                     family: "",
                     colr: Colors.black45,
-                    size: 18,
+                    size: 18.sp,
                   ),
                 ],
               ),

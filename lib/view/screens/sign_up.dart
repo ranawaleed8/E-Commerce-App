@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:reval/home.dart';
+import 'package:reval/view/screens/home.dart';
+import 'package:reval/view/screens/log_in.dart';
+import 'package:reval/view/screens/auth_service.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -10,17 +13,61 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  final AuthService _authService = AuthService();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _repeatPasswordController =
       TextEditingController();
+  String? _errorMessage;
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _repeatPasswordController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _signUp() async {
+    final email = _emailController.text.trim();
+    final password = _passwordController.text.trim();
+    final repeatPassword = _repeatPasswordController.text.trim();
+
+    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+    if (!emailRegex.hasMatch(email)) {
+      setState(() {
+        _errorMessage = 'Please enter a valid email address';
+      });
+      return;
+    }
+
+    if (password != repeatPassword) {
+      setState(() {
+        _errorMessage = 'Passwords do not match';
+      });
+      return;
+    }
+
+    final user = await _authService.signUp(email, password);
+    if (user != null) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const Home()),
+      );
+    } else {
+      setState(() {
+        _errorMessage = 'Error creating account';
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFEBE3DD),
+      backgroundColor: const Color(0xFFEBE3DD),
       appBar: AppBar(
-        backgroundColor: Color(0xe8cb5e48),
-        title: const Text("Sign_Up", style: TextStyle(color: Colors.white)),
+        backgroundColor: const Color(0xe8cb5e48),
+        title: const Text("Sign Up", style: TextStyle(color: Colors.white)),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -31,8 +78,8 @@ class _SignUpPageState extends State<SignUpPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: 140),
-                Text(
+                const SizedBox(height: 140),
+                const Text(
                   'Welcome to Reval  ^_^',
                   style: TextStyle(
                     color: Color(0xe8cb5e48),
@@ -49,8 +96,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ),
                 const SizedBox(height: 20),
-
-                Text(
+                const Text(
                   "Let's create your account",
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -60,39 +106,31 @@ class _SignUpPageState extends State<SignUpPage> {
                     fontStyle: FontStyle.italic,
                   ),
                 ),
-
                 const SizedBox(height: 60),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: TextFormField(
+                  child: TextField(
+                    controller: _emailController,
                     decoration: InputDecoration(
                       hintText: 'Enter your E-mail',
-                      hintStyle: TextStyle(
+                      hintStyle: const TextStyle(
                         color: Color(0xe8cb5e48),
                         fontSize: 12,
                       ),
-                      prefixIcon: Icon(Icons.email, color: Color(0xe8cb5e48)),
-                      enabledBorder: OutlineInputBorder(
+                      prefixIcon: const Icon(
+                        Icons.email,
+                        color: Color(0xe8cb5e48),
+                      ),
+                      enabledBorder: const OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white),
                       ),
-                      focusedBorder: OutlineInputBorder(
+                      focusedBorder: const OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white),
                       ),
                       fillColor: Colors.white,
                       filled: true,
+                      errorText: _errorMessage,
                     ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your email';
-                      }
-                      final RegExp emailRegex = RegExp(
-                        r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}\$',
-                      );
-                      if (!emailRegex.hasMatch(value)) {
-                        return 'Please enter a valid email address';
-                      }
-                      return null;
-                    },
                   ),
                 ),
                 const SizedBox(height: 10),
@@ -101,7 +139,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   child: TextField(
                     controller: _passwordController,
                     obscureText: true,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'Password',
                       hintStyle: TextStyle(
                         color: Color(0xe8cb5e48),
@@ -128,8 +166,8 @@ class _SignUpPageState extends State<SignUpPage> {
                   child: TextField(
                     controller: _repeatPasswordController,
                     obscureText: true,
-                    decoration: InputDecoration(
-                      hintText: ' Repeat Password',
+                    decoration: const InputDecoration(
+                      hintText: 'Repeat Password',
                       hintStyle: TextStyle(
                         color: Color(0xe8cb5e48),
                         fontSize: 12,
@@ -155,37 +193,50 @@ class _SignUpPageState extends State<SignUpPage> {
                   child: SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {
-                        if (_passwordController.text !=
-                            _repeatPasswordController.text) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text('Passwords do not match'),
-                              backgroundColor: Colors.red,
-                            ),
-                          );
-                        } else {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => Home()),
-                          );
-                        }
-                      },
+                      onPressed: _signUp,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xe8cb5e48),
+                        backgroundColor: const Color(0xe8cb5e48),
                         foregroundColor: Colors.white,
-                        padding: EdgeInsets.symmetric(vertical: 14),
+                        padding: const EdgeInsets.symmetric(vertical: 14),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                      child: Text(
+                      child: const Text(
                         'Sign Up',
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                  child: RichText(
+                    text: TextSpan(
+                      style: const TextStyle(fontSize: 18, color: Colors.white),
+                      children: [
+                        const TextSpan(text: "Already have an account?"),
+                        TextSpan(
+                          text: 'Sign in',
+                          style: const TextStyle(
+                            color: Color(0xe8cb5e48),
+                            fontWeight: FontWeight.bold,
+                          ),
+                          recognizer:
+                              TapGestureRecognizer()
+                                ..onTap = () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const logIn(),
+                                    ),
+                                  );
+                                },
+                        ),
+                      ],
                     ),
                   ),
                 ),

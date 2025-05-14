@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:reval/categores/cat.dart';
-import 'package:reval/home.dart';
-import 'package:reval/widget/imgbot.dart';
-import 'package:reval/widget/texxt.dart';
+import 'package:reval/ViewModel/cat.dart';
+import 'package:reval/view/screens/home.dart';
+import 'package:reval/view/widget/imgbot.dart';
+import 'package:reval/view/widget/texxt.dart';
 
 class CategoryItem {
   final String title;
@@ -35,18 +35,54 @@ class _ViewallState extends State<Viewall> {
     allItems = [
       CategoryItem(
         title: 'Formal',
-        imagePath: 'images/girl3.jpg',
+        imagePath: 'images/image1.jpg',
         page: ShoppingScreen(
           categoryName: 'Formal',
           products: [
             Product(
-              imagePath: 'images/girl1.jpg',
-              name: 'Short dress',
+              imagePath: 'images/formal/1.jpg',
+              name: 'Women’s Suit',
               price: 70,
               page: Home(),
             ),
             Product(
-              imagePath: 'images/girl1.jpg',
+              imagePath: 'images/formal/2.jpg',
+              name: 'PantsuitBlazer',
+              price: 100,
+              page: Home(),
+            ),
+            Product(
+              imagePath: 'images/formal/3.jpg',
+              name: 'Pantsuit',
+              price: 80,
+              page: Home(),
+            ),
+            Product(
+              imagePath: 'images/formal/4.jpg',
+              name: 'Jacket',
+              price: 40,
+              page: Home(),
+            ),
+            Product(
+              imagePath: 'images/formal/5.jpg',
+              name: 'Short dress',
+              price: 100,
+              page: Home(),
+            ),
+            Product(
+              imagePath: 'images/formal/6.jpg',
+              name: 'Short dress',
+              price: 100,
+              page: Home(),
+            ),
+            Product(
+              imagePath: 'images/formal/7.jpg',
+              name: 'Short dress',
+              price: 100,
+              page: Home(),
+            ),
+            Product(
+              imagePath: 'images/formal/8.jpg',
               name: 'Short dress',
               price: 100,
               page: Home(),
@@ -77,13 +113,13 @@ class _ViewallState extends State<Viewall> {
       ),
       CategoryItem(
         title: 'Jeans',
-        imagePath: 'images/girl3.jpg',
+        imagePath: 'images/jeans.jpg',
         page: ShoppingScreen(
-          categoryName: 'Dresses',
+          categoryName: 'Jeans',
           products: [
             Product(
               imagePath: 'images/girl1.jpg',
-              name: 'Short dress',
+              name: 'Jeans',
               price: 70,
               page: Home(),
             ),
@@ -98,7 +134,7 @@ class _ViewallState extends State<Viewall> {
       ),
       CategoryItem(
         title: 'Tops',
-        imagePath: 'images/girl3.jpg',
+        imagePath: 'images/top.jpg',
         page: ShoppingScreen(
           categoryName: 'Dresses',
           products: [
@@ -130,7 +166,7 @@ class _ViewallState extends State<Viewall> {
               page: Home(),
             ),
             Product(
-              imagePath: 'images/girl1.jpg',
+              imagePath: 'images/image2.jpg',
               name: 'Short dress',
               price: 100,
               page: Home(),
@@ -140,7 +176,7 @@ class _ViewallState extends State<Viewall> {
       ),
       CategoryItem(
         title: 'Co-ords',
-        imagePath: 'images/girl3.jpg',
+        imagePath: 'images/image2.jpg',
         page: Home(),
       ),
       CategoryItem(title: 'Denim', imagePath: 'images/girl3.jpg', page: Home()),
@@ -249,32 +285,35 @@ class _ViewallState extends State<Viewall> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.w),
+                  padding: EdgeInsets.symmetric(horizontal: 0.w),
                   child: Wrap(
-                    spacing: 30,
-                    runSpacing: 30,
+                    spacing: 20.w,
+                    runSpacing: 20.h,
                     alignment: WrapAlignment.center,
                     children:
                         filteredItems.map((item) {
-                          return Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Imgbot(
-                                curv1: 50,
-                                curv2: 50,
-                                h: 200,
-                                w: 120,
-                                img: item.imagePath,
-                                page: item.page,
-                              ),
-                              SizedBox(height: 10.h),
-                              Texxt(
-                                text1: item.title,
-                                family: "",
-                                colr: Colors.black,
-                                size: 18,
-                              ),
-                            ],
+                          return SizedBox(
+                            width: 140.w, // عرض موحد لكل عنصر
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Imgbot(
+                                  curv1: 50,
+                                  curv2: 50,
+                                  h: 150.h, // قلل الارتفاع لتخفيف الفراغ
+                                  w: 120.w,
+                                  img: item.imagePath,
+                                  page: item.page,
+                                ),
+                                SizedBox(height: 8.h),
+                                Texxt(
+                                  text1: item.title,
+                                  family: "",
+                                  colr: Colors.black,
+                                  size: 16.sp,
+                                ),
+                              ],
+                            ),
                           );
                         }).toList(),
                   ),

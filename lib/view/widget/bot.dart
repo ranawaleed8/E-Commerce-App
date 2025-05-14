@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart'; // أضف هذه
 
 class Bot extends StatefulWidget {
   final String text1;
@@ -28,11 +29,11 @@ class _BotState extends State<Bot> {
     return Center(
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: Color(0xf7ffffff),
+          borderRadius: BorderRadius.circular(20.r), // تم التعديل
+          color: const Color(0xf7ffffff),
         ),
-        height: widget.h,
-        width: widget.w,
+        height: widget.h.h, // تم التعديل
+        width: widget.w.w, // تم التعديل
         child: TextButton(
           onPressed: () {
             Navigator.push(
@@ -44,7 +45,7 @@ class _BotState extends State<Bot> {
             widget.text1,
             style: TextStyle(
               color: widget.colr,
-              fontSize: widget.size,
+              fontSize: widget.size.sp, // تم التعديل
               fontWeight: FontWeight.bold,
             ),
           ),
